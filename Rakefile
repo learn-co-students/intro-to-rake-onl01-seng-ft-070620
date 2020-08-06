@@ -1,3 +1,5 @@
+require 'pry'
+
 namespace :greeting do 
   desc 'outputs hello to the terminal'
   task :hello do
@@ -22,10 +24,12 @@ namespace :db do
   end 
 end
 
+
 task :environment do
   require_relative './config/environment.rb'
 end 
 
-task :console do 
-  require 'pry'
+desc 'drop into the pry console'
+task :console => :environment do 
+  Pry.start
 end
