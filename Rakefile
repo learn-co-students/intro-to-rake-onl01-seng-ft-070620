@@ -1,3 +1,8 @@
+desc 'loads the environment file'
+task :environment do
+  require_relative './config/environment.rb'
+end
+
 namespace :greeting do
   desc 'outputs hello to the terminal'
   task :hello do
@@ -10,17 +15,7 @@ namespace :greeting do
   end
 end
 
-desc 'drops into the Pry console'
-task :console => :environment do
-  Pry.start
-end
-
 namespace :db do
-  desc 'loads the environment file'
-  task :environment do
-    require_relative './config/environment.rb'
-  end
-
   desc 'migrates changes to the database'
   task :migrate => :environment do
     Student.create_table
@@ -30,4 +25,9 @@ namespace :db do
   task :seed do
     require_relative './db/seeds.rb'
   end
+end
+
+desc 'drops into the Pry console'
+task :console => :environment do
+  Pry.start
 end
